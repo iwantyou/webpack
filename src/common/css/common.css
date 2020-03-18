@@ -1,0 +1,10 @@
+:local(.title){
+    color:red
+}
+h1{
+    color:blue
+}
+.bg{
+    height: 100px;
+    background: url(../../../assets/logo192.png) no-repeat;
+}

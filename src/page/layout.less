@@ -1,0 +1,31 @@
+.main{
+    width: 100%;
+    min-height: 100vh;
+    .header{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100px;
+        color: #fff;
+        background-color: rgba(0,0,0,.7)
+    }
+    .left{
+        
+        float: left;
+        width: 200px;
+        min-height: calc(100vh - 100px);
+        ul{
+            list-style: none;
+            &>li{
+                box-sizing: border-box;
+                padding: 6px 12px;
+                text-align:center
+            }
+        }
+    }
+    .right{
+        overflow: hidden;
+        margin-left: 200px;
+        
+    }
+}
