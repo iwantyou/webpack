@@ -6,15 +6,24 @@ import Web1 from '../page/web1'
 export const routes = [
   {
     path: "/web",
-    icon: "",
     exact: true,
     requireAuth: true,
-    component: Web,
+    // component: Web,
     children: [{
+        path: "/web",
+        exact: true,
+        icon: "",
+        requireAuth: false,
+        component: Web
+    },
+    {
         path: "/web/1",
         exact: true,
+        icon: "",
+        requireAuth: false,
         component: Web1
-    }]
+    }
+]
   },
   {
     path: "/rule",

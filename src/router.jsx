@@ -3,21 +3,38 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Redirect,
-  Link
+  Redirect
 } from "react-router-dom";
 import { routes } from "./router/router";
 import Layout from "./page/layout";
 function Routercomponent(route) {
-  return (
-    <Route
-      path={route.path}
-      exact={route.exact}
-      render={props => {
-        return <route.component {...props} />;
-      }}
-    ></Route>
-  );
+  let dom1 = null;
+  let dom2 = null;
+  if (route.children) {
+    dom1 = (
+      <div className="mulu">
+        {route.children.map((child, i) => {
+          return <Routercomponent {...child} key={i} />;
+        })}
+      </div>
+    );
+  } else {
+    dom2 = (
+      <Route
+        path={route.path}
+        exact={route.exact}
+        render={props => {
+          if (route.requireAuth) {
+            return <div>你还没登陆哦</div>;
+          }
+          return <route.component {...props} />;
+        }}
+      ></Route>
+    );
+  }
+
+  let dom = route.children ? dom1 : dom2;
+  return dom;
 }
 const Index = () => {
   return (
@@ -25,6 +42,7 @@ const Index = () => {
       <Layout>
         <Switch>
           <>
+            {/* <Redirect from="/" to="web" /> */}
             {routes.map((route, i) => {
               return <Routercomponent {...route} key={i} />;
             })}
