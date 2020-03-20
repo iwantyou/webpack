@@ -1,56 +1,39 @@
 import React from "react";
 import {
-  BrowserRouter as Router,
+  HashRouter as Router,
   Switch,
   Route,
-  Redirect
+  Redirect,
+  withRouter
 } from "react-router-dom";
-import { routes } from "./router/router";
 import Layout from "./page/layout";
-function Routercomponent(route) {
-  let dom1 = null;
-  let dom2 = null;
-  if (route.children) {
-    dom1 = (
-      <div className="mulu">
-        {route.children.map((child, i) => {
-          return <Routercomponent {...child} key={i} />;
-        })}
-      </div>
-    );
-  } else {
-    dom2 = (
-      <Route
-        path={route.path}
-        exact={route.exact}
-        render={props => {
-          if (route.requireAuth) {
-            return <div>你还没登陆哦</div>;
-          }
-          return <route.component {...props} />;
-        }}
-      ></Route>
-    );
-  }
+import { Login } from "./page/login";
 
-  let dom = route.children ? dom1 : dom2;
-  return dom;
-}
 const Index = () => {
   return (
     <Router>
-      <Layout>
-        <Switch>
-          <>
-            {/* <Redirect from="/" to="web" /> */}
-            {routes.map((route, i) => {
-              return <Routercomponent {...route} key={i} />;
-            })}
-          </>
-        </Switch>
-      </Layout>
+      <Switch>
+        <>
+          <Auth />
+          <Redirect from="/" to="/layout" />
+          <Route
+            path="/layout"
+            render={props => <Layout {...props} />}
+          />
+          <Route path="/login" exact component={Login} />
+        </>
+      </Switch>
     </Router>
   );
 };
-
+//
+// 路由拦截
+const Auth = withRouter(props => {
+  console.log(props, 111);
+  const { location } = props;
+  if (location.pathname == "/layout/rule") {
+    return <Redirect to={{ pathname: "/login", state: { from: location.pathname } }} />;
+  }
+  return null;
+});
 export default Index;

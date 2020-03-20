@@ -5,38 +5,41 @@ import Web1 from '../page/web1'
 
 export const routes = [
   {
-    path: "/web",
+    name: '主页',
+    path: "/layout/web",
     exact: true,
     requireAuth: true,
-    // component: Web,
+    icon: 'icon-zhuye',
     children: [{
-        path: "/web",
+        name: '主页1',
+        path: "/layout/web",
         exact: true,
-        icon: "",
         requireAuth: false,
         component: Web
     },
     {
-        path: "/web/1",
+        name: '主页2',
+        path: "/layout/web/1",
         exact: true,
-        icon: "",
         requireAuth: false,
         component: Web1
     }
 ]
   },
   {
-    path: "/rule",
-    icon: "",
+    name: '规则',
+    path: "/layout/rule",
+    icon: "icon-guize",
     exact: true,
     requireAuth: true,
     component: Rule
   },
   {
-    path: "/user/:id",
-    icon: "",
+    name: '用户',
+    path: "/layout/user/:id",
+    icon: "icon-yonghu",
     exact: true,
-    requireAuth: true,
+    requireAuth: false,
     component: User
   }
 ];

@@ -4,7 +4,7 @@ function User (props){
     const { match }  = props
     return (
         <div className="user">
-            这是user页面{JSON.stringify(props)}
+            这是user页面{match.params.id}
         </div>
     )
 }

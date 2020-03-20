@@ -2,8 +2,11 @@ import "../src/common/css/common.css";
 import React from "react";
 import RenderDOM from "react-dom";
 import Index from './router'
-// import Index from './page/layout'
-// import Add from './page/a'
+import { message } from 'antd'
+message.config({
+  top: '30vh',
+  duration: 1
+})
 
 function render() {
   RenderDOM.render(<Index />, document.querySelector("#app"));

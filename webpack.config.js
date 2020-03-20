@@ -7,6 +7,7 @@ const PATH = path.join(__dirname, "dist/js");
 const WebpackBundleAnalyzer = require("webpack-bundle-analyzer")
   .BundleAnalyzerPlugin;
 const ANA = process.env.NODE_ANALYZER;
+const CWD = process.cwd()
 module.exports = {
   mode: ENV === "development" ? "development" : "production",
   entry: {
@@ -35,7 +36,8 @@ module.exports = {
     modules: ["node_modules"],
     extensions: [".js", ".jsx"],
     alias: {
-      "@": path.resolve(__dirname, "src")
+      "@": path.resolve(CWD, "src"),
+      component: path.resolve(CWD, "component")
     }
   },
   module: {
@@ -43,7 +45,7 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         exclude: [path.join(__dirname, "node_modules")],
-        include: [path.join(__dirname, "src")],
+        include: [path.join(__dirname, "src"),path.join(__dirname, "component")],
         use: [
           {
             loader: "babel-loader",
@@ -119,6 +121,14 @@ module.exports = {
             name: "[name].[ext]",
             publicPath: "assets/" /**这个值的默认值为output的publicPath的值  */
           }
+        }
+      },
+      {
+        test: /\.(svg|woff2?|eot|ttf|otf)(\?.*)?$/,
+        loader: 'url-loader',
+        options: {
+          limit: 10000,
+          name: '[name].[hash:7].[ext]'
         }
       }
     ]
