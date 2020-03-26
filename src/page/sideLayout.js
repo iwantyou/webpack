@@ -7,12 +7,15 @@ import classnames from "classnames";
 import "./sidelayout.less";
 const { SubMenu, Item } = Menu;
 export default class SideLayout extends React.Component {
-  state = {
-    collapsed: true,
-    slecteKeys: [],
-    openKeys: [],
-    iscollapsedBtn: false
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      collapsed: true,
+      slecteKeys: [],
+      openKeys: [],
+      iscollapsedBtn: false
+    }; 
+  }
   toggleCollapse = () => {
     this.setState(state => ({
       collapsed: !state.collapsed

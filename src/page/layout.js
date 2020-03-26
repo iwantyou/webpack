@@ -13,7 +13,7 @@ class Layout extends React.Component {
       <div className="main">
         <div className="header">头部100%</div>
         <SideLayout />
-        <div className="right">{this.props.children}</div>
+        <div className="right">{this.props.children()}</div>
       </div>
     );
   }
@@ -26,7 +26,7 @@ function Routercomponent(route, props) {
     }
   }
 const ConnectLayout = props => {
-    return <Layout>{routes.map(route => Routercomponent(route, props))}</Layout>;
+    return <Layout>{() => {return routes.map(route => Routercomponent(route, props))}}</Layout>;
   };
   
 export default ConnectLayout;

@@ -1,3 +1,4 @@
+import { hot } from 'react-hot-loader/root'
 import React from "react";
 import {
   HashRouter as Router,
@@ -36,4 +37,4 @@ const Auth = withRouter(props => {
   }
   return null;
 });
-export default Index;
+export default hot(Index);

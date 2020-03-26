@@ -6,9 +6,10 @@
   "scripts": {
     "webpack": "webpack --progress --config webpack.config.js",
     "dev": "NODE_ENV=development webpack --progress --config webpack.config.js",
-    "build": "NODE_ENV=production webpack --progress --config webpack.config.js",
-    "analyzer": "NODE_ANALYZER=true npm run dev",
-    "server": "NODE_ENV=development webpack-dev-server --progress --inline --hot"
+    "build": "NODE_ENV=production webpack --progress --config webpack.prod.js",
+    "analyzer": "NODE_ANALYZER=true npm run dev:p",
+    "server": "NODE_ENV=development webpack-dev-server --progress --inline --hot",
+    "dev:p": "rm -rf dist/ && NODE_ENV=development webpack --progress --config build/webpack.dev.js"
   },
   "author": "",
   "license": "ISC",
@@ -22,9 +23,13 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/plugin-proposal-decorators": "^7.8.3",
+    "@babel/plugin-syntax-decorators": "^7.8.3",
     "@babel/plugin-transform-runtime": "^7.8.3",
     "antd": "^4.0.3",
+    "autoprefixer": "^9.7.5",
     "babel-plugin-import": "^1.13.0",
+    "chalk": "^3.0.0",
     "classnames": "^2.2.6",
     "css-loader": "^3.4.2",
     "file-loader": "^5.1.0",
@@ -32,8 +37,11 @@
     "less": "^3.11.1",
     "less-loader": "^5.0.0",
     "mini-css-extract-plugin": "^0.9.0",
+    "postcss-import": "^12.0.1",
+    "postcss-loader": "^3.0.0",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
+    "react-hot-loader": "^4.12.20",
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.1.2",
     "redux": "^4.0.5",
@@ -42,5 +50,6 @@
     "webpack": "^4.41.6",
     "webpack-bundle-analyzer": "^3.6.1",
     "webpack-dev-server": "^3.10.3"
-  }
+  },
+  "browserslist":["last 10 version"]
 }
