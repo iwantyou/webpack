@@ -4,8 +4,12 @@ const webpack = require("webpack");
 const chalk = require('chalk')
 const path = require("path");
 const assert = require('assert')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 config.plugins = config.plugins.concat([
+  new MiniCssExtractPlugin({
+    filename: "css/[name].css"
+  }),
   new webpack.HotModuleReplacementPlugin(),
   new webpack.DefinePlugin({
     TYPE: JSON.stringify('cdn')

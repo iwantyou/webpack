@@ -39,6 +39,9 @@ module.exports = {
           {
             loader: "babel-loader",
             options: {}
+          },
+          {
+            loader: "eslint-loader"
           }
         ]
       },
@@ -116,10 +119,6 @@ module.exports = {
       template: "index.html", // 匹配路径会从跟路径开始 process.pwd()
       filename: "index.html",
       title: "webpack 测试"
-    }),
-    new MiniCssExtractPlugin({
-      filename: "css/[name].css",
-      chunkFilename: "[id].css"
     })
   ].concat(ANA ? [new WebpackBundleAnalyzer()] : [])
 };

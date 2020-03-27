@@ -1,4 +1,4 @@
-import { hot } from 'react-hot-loader/root'
+import { hot } from "react-hot-loader/root";
 import React from "react";
 import {
   HashRouter as Router,
@@ -17,10 +17,7 @@ const Index = () => {
         <>
           <Auth />
           <Redirect from="/" to="/layout" />
-          <Route
-            path="/layout"
-            render={props => <Layout {...props} />}
-          />
+          <Route path="/layout" render={props => <Layout {...props} />} />
           <Route path="/login" exact component={Login} />
         </>
       </Switch>
@@ -33,7 +30,11 @@ const Auth = withRouter(props => {
   console.log(props, 111);
   const { location } = props;
   if (location.pathname == "/layout/rule") {
-    return <Redirect to={{ pathname: "/login", state: { from: location.pathname } }} />;
+    return (
+      <Redirect
+        to={{ pathname: "/login", state: { from: location.pathname } }}
+      />
+    );
   }
   return null;
 });
