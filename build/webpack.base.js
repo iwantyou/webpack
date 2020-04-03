@@ -8,6 +8,13 @@ const WebpackBundleAnalyzer = require("webpack-bundle-analyzer")
 const ANA = process.env.NODE_ANALYZER;
 const CWD = process.cwd();
 
+const cretaeRule = () => {
+  return {
+    test: /\.jsx$/,
+    exclude: [path.join(__dirname, "..", "node_modules")],
+    use: [{loader: 'eslint-loader'}]
+  }
+}
 module.exports = {
   mode: ENV === "development" ? "development" : "production",
   entry: {
@@ -23,11 +30,13 @@ module.exports = {
     extensions: [".js", ".jsx", "json"],
     alias: {
       "@": path.resolve(CWD, "src"),
-      component: path.resolve(CWD, "component")
+      component: path.resolve(CWD, "component"),
+      action: path.resolve(CWD, "src/store")
     }
   },
   module: {
     rules: [
+    //   cretaeRule(),
       {
         test: /\.(js|jsx)$/,
         exclude: [path.join(__dirname, "..", "node_modules")],
@@ -39,9 +48,6 @@ module.exports = {
           {
             loader: "babel-loader",
             options: {}
-          },
-          {
-            loader: "eslint-loader"
           }
         ]
       },

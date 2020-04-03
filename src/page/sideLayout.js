@@ -13,6 +13,7 @@ export default class SideLayout extends React.Component {
       collapsed: true,
       slecteKeys: [],
       openKeys: [],
+      defaultopenKeys: [],
       iscollapsedBtn: false
     }; 
   }
@@ -45,7 +46,7 @@ export default class SideLayout extends React.Component {
     );
   };
   render() {
-    const { collapsed, slecteKeys, openKeys, iscollapsedBtn } = this.state;
+    const { collapsed, slecteKeys, openKeys, iscollapsedBtn, defaultopenKeys } = this.state;
     return (
       <div className={classnames("sidelayout")}>
         {iscollapsedBtn && (
@@ -64,7 +65,7 @@ export default class SideLayout extends React.Component {
         <Menu
           className={classnames("SideLayout")}
           defaultSelectedKeys={slecteKeys}
-          defaultOpenKeys={openKeys}
+          defaultOpenKeys={defaultopenKeys}
           mode="inline"
           theme="dark"
           inlineCollapsed={!collapsed}
