@@ -3,6 +3,6 @@
  * 
  */
 export const log = store => next => action =>{
-    console.log(`type:${actiom.type}`)
+    console.log(`type:${action.type}`)
     next(action)
 }
