@@ -3,3 +3,6 @@ import * as constant from './config'
 export const login = () => ({
     type: constant.LOGIN
 })
+export const input = () => ({
+    type: constant.INPUT 
+})

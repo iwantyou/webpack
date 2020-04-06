@@ -14,9 +14,6 @@ import { connect } from "react-redux"
 const mapStateProps = state => ({
     isLogin: state.isLogin
 })
-const mapDispatchProps = {
-     login:() => ({type: 'LOGIN'})
-}
 
 class Index extends React.Component {
 
@@ -36,17 +33,16 @@ class Index extends React.Component {
         )
     }
 }
-@connect(mapStateProps, mapDispatchProps)
+@connect(mapStateProps)
 class AppContainer extends React.Component{
     componentDidMount() {
         const { location, isLogin, history } = this.props
-        console.log('mount', this.props)
         if (!isLogin && location.pathname === '/layout/rule') {
             console.log(history)
         }
     }
-    componentWillUpdate(nextProps) {
-        const { location, isLogin, history } = nextProps
+    componentDidUpdate() {
+        const { location, isLogin, history } = this.props
         console.log('update', location)
         if (!isLogin && location.pathname === '/layout/rule') {
             console.log(111, history)

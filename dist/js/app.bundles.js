@@ -113,7 +113,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "0fecc3bf2bf6d515e1d6";
+/******/ 	var hotCurrentHash = "8c8029d4149481e306bf";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1121,6 +1121,59 @@ render();
 
 /***/ }),
 
+/***/ "./src/middleware/log.js":
+/*!*******************************!*\
+  !*** ./src/middleware/log.js ***!
+  \*******************************/
+/*! exports provided: log */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* WEBPACK VAR INJECTION */(function(module) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "log", function() { return log; });
+(function () {
+  var enterModule = typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal.enterModule : undefined;
+  enterModule && enterModule(module);
+})();
+
+var __signature__ = typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal["default"].signature : function (a) {
+  return a;
+};
+
+/**
+ * 功能： 打印日志
+ * 
+ */
+var log = function log(store) {
+  return function (next) {
+    return function (action) {
+      console.log("type:" + actiom.type);
+      next(action);
+    };
+  };
+};
+;
+
+(function () {
+  var reactHotLoader = typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal.default : undefined;
+
+  if (!reactHotLoader) {
+    return;
+  }
+
+  reactHotLoader.register(log, "log", "/Users/duzibo/test/webpack1/src/middleware/log.js");
+})();
+
+;
+
+(function () {
+  var leaveModule = typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal.leaveModule : undefined;
+  leaveModule && leaveModule(module);
+})();
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../node_modules/webpack/buildin/harmony-module.js */ "./node_modules/webpack/buildin/harmony-module.js")(module)))
+
+/***/ }),
+
 /***/ "./src/page/layout.js":
 /*!****************************!*\
   !*** ./src/page/layout.js ***!
@@ -1607,7 +1660,7 @@ var SideLayout = /*#__PURE__*/function (_React$Component) {
       }, !isChild && react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement(component_icon_icon__WEBPACK_IMPORTED_MODULE_12__["Icon"], {
         className: classnames__WEBPACK_IMPORTED_MODULE_13___default()("" + route.icon)
       }), react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_10__["Link"], {
-        to: route.path
+        to: route.path === '/layout/user/:id' ? '/layout/user/01' : route.path
       }, route.name));
     });
 
@@ -1622,6 +1675,10 @@ var SideLayout = /*#__PURE__*/function (_React$Component) {
   }
 
   var _proto = SideLayout.prototype;
+
+  _proto.componentDidUpdate = function componentDidUpdate() {
+    console.log('nextProps', this.props);
+  };
 
   _proto.render = function render() {
     var _this2 = this;
@@ -1730,6 +1787,7 @@ var __signature__ = typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoader
 
 function User(props) {
   var match = props.match;
+  console.log('user', match);
   return react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
     className: "user"
   }, "\u8FD9\u662Fuser\u9875\u9762", match.params.id);
@@ -1917,14 +1975,6 @@ var mapStateProps = function mapStateProps(state) {
   };
 };
 
-var mapDispatchProps = {
-  login: function login() {
-    return {
-      type: 'LOGIN'
-    };
-  }
-};
-
 var Index = /*#__PURE__*/function (_React$Component) {
   _babel_runtime_helpers_inheritsLoose__WEBPACK_IMPORTED_MODULE_2___default()(Index, _React$Component);
 
@@ -1959,7 +2009,7 @@ var Index = /*#__PURE__*/function (_React$Component) {
   return Index;
 }(react__WEBPACK_IMPORTED_MODULE_4___default.a.Component);
 
-var AppContainer = (_dec = Object(react_redux__WEBPACK_IMPORTED_MODULE_8__["connect"])(mapStateProps, mapDispatchProps), _dec(_class = /*#__PURE__*/function (_React$Component2) {
+var AppContainer = (_dec = Object(react_redux__WEBPACK_IMPORTED_MODULE_8__["connect"])(mapStateProps), _dec(_class = /*#__PURE__*/function (_React$Component2) {
   _babel_runtime_helpers_inheritsLoose__WEBPACK_IMPORTED_MODULE_2___default()(AppContainer, _React$Component2);
 
   function AppContainer() {
@@ -1973,17 +2023,17 @@ var AppContainer = (_dec = Object(react_redux__WEBPACK_IMPORTED_MODULE_8__["conn
         location = _this$props.location,
         isLogin = _this$props.isLogin,
         history = _this$props.history;
-    console.log('mount', this.props);
 
     if (!isLogin && location.pathname === '/layout/rule') {
       console.log(history);
     }
   };
 
-  _proto2.componentWillUpdate = function componentWillUpdate(nextProps) {
-    var location = nextProps.location,
-        isLogin = nextProps.isLogin,
-        history = nextProps.history;
+  _proto2.componentDidUpdate = function componentDidUpdate() {
+    var _this$props2 = this.props,
+        location = _this$props2.location,
+        isLogin = _this$props2.isLogin,
+        history = _this$props2.history;
     console.log('update', location);
 
     if (!isLogin && location.pathname === '/layout/rule') {
@@ -2024,7 +2074,6 @@ var _default = Object(react_hot_loader_root__WEBPACK_IMPORTED_MODULE_3__["hot"])
   }
 
   reactHotLoader.register(mapStateProps, "mapStateProps", "/Users/duzibo/test/webpack1/src/router.jsx");
-  reactHotLoader.register(mapDispatchProps, "mapDispatchProps", "/Users/duzibo/test/webpack1/src/router.jsx");
   reactHotLoader.register(Index, "Index", "/Users/duzibo/test/webpack1/src/router.jsx");
   reactHotLoader.register(AppContainer, "AppContainer", "/Users/duzibo/test/webpack1/src/router.jsx");
   reactHotLoader.register(App, "App", "/Users/duzibo/test/webpack1/src/router.jsx");
@@ -2128,12 +2177,13 @@ var routes = [{
 /*!*****************************!*\
   !*** ./src/store/action.js ***!
   \*****************************/
-/*! exports provided: login */
+/*! exports provided: login, input */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* WEBPACK VAR INJECTION */(function(module) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "login", function() { return login; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "input", function() { return input; });
 /* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./config */ "./src/store/config.js");
 (function () {
   var enterModule = typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal.enterModule : undefined;
@@ -2151,6 +2201,11 @@ var login = function login() {
     type: _config__WEBPACK_IMPORTED_MODULE_0__["LOGIN"]
   };
 };
+var input = function input() {
+  return {
+    type: _config__WEBPACK_IMPORTED_MODULE_0__["INPUT"]
+  };
+};
 ;
 
 (function () {
@@ -2161,6 +2216,7 @@ var login = function login() {
   }
 
   reactHotLoader.register(login, "login", "/Users/duzibo/test/webpack1/src/store/action.js");
+  reactHotLoader.register(input, "input", "/Users/duzibo/test/webpack1/src/store/action.js");
 })();
 
 ;
@@ -2177,12 +2233,13 @@ var login = function login() {
 /*!*****************************!*\
   !*** ./src/store/config.js ***!
   \*****************************/
-/*! exports provided: LOGIN */
+/*! exports provided: LOGIN, INPUT */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* WEBPACK VAR INJECTION */(function(module) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOGIN", function() { return LOGIN; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "INPUT", function() { return INPUT; });
 (function () {
   var enterModule = typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal.enterModule : undefined;
   enterModule && enterModule(module);
@@ -2193,6 +2250,7 @@ var __signature__ = typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoader
 };
 
 var LOGIN = "LOGIN";
+var INPUT = "INPUT";
 ;
 
 (function () {
@@ -2203,6 +2261,7 @@ var LOGIN = "LOGIN";
   }
 
   reactHotLoader.register(LOGIN, "LOGIN", "/Users/duzibo/test/webpack1/src/store/config.js");
+  reactHotLoader.register(INPUT, "INPUT", "/Users/duzibo/test/webpack1/src/store/config.js");
 })();
 
 ;
@@ -2226,6 +2285,8 @@ var LOGIN = "LOGIN";
 __webpack_require__.r(__webpack_exports__);
 /* WEBPACK VAR INJECTION */(function(module) {/* harmony import */ var _login_login__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./login/login */ "./src/store/login/login.js");
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+/* harmony import */ var redux_thunk__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux-thunk */ "./node_modules/redux-thunk/es/index.js");
+/* harmony import */ var middleware_log__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! middleware/log */ "./src/middleware/log.js");
 (function () {
   var enterModule = typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal.enterModule : undefined;
   enterModule && enterModule(module);
@@ -2238,7 +2299,9 @@ var __signature__ = typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoader
 
 
 
-var _default = Object(redux__WEBPACK_IMPORTED_MODULE_1__["createStore"])(_login_login__WEBPACK_IMPORTED_MODULE_0__["loginReducer"]);
+
+
+var _default = Object(redux__WEBPACK_IMPORTED_MODULE_1__["createStore"])(_login_login__WEBPACK_IMPORTED_MODULE_0__["loginReducer"], Object(redux__WEBPACK_IMPORTED_MODULE_1__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_2__["default"]));
 
 /* harmony default export */ __webpack_exports__["default"] = (_default);
 ;

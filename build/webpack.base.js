@@ -31,7 +31,8 @@ module.exports = {
     alias: {
       "@": path.resolve(CWD, "src"),
       component: path.resolve(CWD, "component"),
-      action: path.resolve(CWD, "src/store")
+      action: path.resolve(CWD, "src/store"),
+      middleware: path.resolve(CWD, 'src/middleware')
     }
   },
   module: {

@@ -41,10 +41,13 @@ export default class SideLayout extends React.Component {
     return (
       <Item key={route.path}>
         {!isChild && <Icon className={classnames(`${route.icon}`)} />}
-        <Link to={route.path}>{route.name}</Link>
+        <Link to={route.path === '/layout/user/:id' ? '/layout/user/01' : route.path}>{route.name}</Link>
       </Item>
     );
   };
+  componentDidUpdate(){
+    console.log('nextProps', this.props)
+  }
   render() {
     const { collapsed, slecteKeys, openKeys, iscollapsedBtn, defaultopenKeys } = this.state;
     return (

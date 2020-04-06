@@ -45,7 +45,6 @@ class Login extends Component{
                     </div>
                     <div className={classnames("form")}>
                         <div style={{ padding: "20px 30px" }}>
-                            {/* <label htmlFor="user">user:</label> */}
                             <input
                                 type='text'
                                 placeholder='123456'
@@ -58,7 +57,6 @@ class Login extends Component{
                             />
                         </div>
                         <div style={{ padding: "20px 30px" }}>
-                            {/* <label htmlFor="password">password:</label> */}
                             <input
                                 type='text'
                                 placeholder='123456'
