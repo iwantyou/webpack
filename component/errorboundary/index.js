@@ -11,7 +11,7 @@ export default class Errorboundary extends React.Component {
         return { hasError: true }
     }
     componentDidCatch(err, errinfo) {
-        console.log("err", err, errinfo)
+        console.log("err: 错",)
     }
     render() {
         let { hasError } = this.state

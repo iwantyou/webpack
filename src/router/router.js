@@ -1,7 +1,12 @@
-import Web from '../page/web'
-import User from '../page/user'
-import Rule from '../page/rule'
-import Web1 from '../page/web1'
+import AsyncComponent from 'component/asyncCompont/index'
+
+const Web = AsyncComponent(() => import('../page/web'))
+
+const User = AsyncComponent(() => import('../page/user'))
+
+const Rule = AsyncComponent(() => import('../page/rule'))
+
+const Web1 = AsyncComponent(() => import('../page/web1'))
 
 export const routes = [
   {

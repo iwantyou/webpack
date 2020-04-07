@@ -2,10 +2,10 @@ import React from 'react'
 
 function User (props){
     const { match }  = props
-    console.log('user', match)
+    console.log('user', props)
     return (
         <div className="user">
-            这是user页面{match.params.id}
+            这是user页面
         </div>
     )
 }

@@ -12,6 +12,7 @@ class Layout extends React.Component {
     }
 }
   render() {
+    console.log('layout:', this.props)
     return (
       <div className="main">
         <div className="header">头部100%</div>
@@ -32,4 +33,4 @@ const ConnectLayout = props => {
     return <Layout {...props}>{() => {return routes.map(route => Routercomponent(route, props))}}</Layout>;
   };
   
-export default ConnectLayout;
+export default ConnectLayout

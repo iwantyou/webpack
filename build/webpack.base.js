@@ -23,7 +23,8 @@ module.exports = {
   output: {
     publicPath: ENV === "development" ? "" : "http://baidu.com/cdn",
     path: PATH,
-    filename: "js/[name].bundles.js"
+    filename: "js/[name].bundles.js",
+    chunkFilename: "js/[id].js"
   },
   resolve: {
     modules: ["node_modules"],
