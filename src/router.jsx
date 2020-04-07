@@ -1,5 +1,6 @@
 import { hot } from "react-hot-loader/root"
 import React from "react"
+import Errorboundary from  'component/errorboundary/index'
 import {
     BrowserRouter as Router,
     Switch,
@@ -19,6 +20,7 @@ class Index extends React.Component {
 
     render() {
         return (
+            <Errorboundary>
             <Router>
                 <App>
                 <Switch>
@@ -30,6 +32,7 @@ class Index extends React.Component {
                 </Switch>
                 </App>
             </Router>
+            </Errorboundary>
         )
     }
 }
