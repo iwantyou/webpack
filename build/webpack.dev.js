@@ -48,7 +48,7 @@ let server = new WebpackDevServer(compiler, {
   historyApiFallback: true
 });
 server.listen(8081, 'localhost', () => {
-  console.log(chalk.green("编译成功，调试开始"));
+  console.log(chalk.green("编译中..."));
 });
 
 module.exports = config

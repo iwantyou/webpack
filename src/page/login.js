@@ -5,14 +5,31 @@ import classnames from "classnames";
 import { connect } from "react-redux";
 import { login } from 'action/action'
 import "./login.less";
+function unmont (target) {
+    let next =  target.prototype.componentWillUnmount || function(){}
+    target.prototype.componentWillUnmount = function () {
+       if(next) next.call(this, ...arguments)
+       this._unmount = true
+       console.log('unmont', '123')
+    }
+    let setState = target.prototype.setState
+    target.prototype.setState = function () {
+       if(this._unmount) return ;
+       setState.call(this, ...arguments)
+    }
+  } 
 @connect((state) => ({isLogin: state.isLogin}),{ login })
+@unmont
 class Login extends Component{
     constructor(props){
         super(props)
         this.state = {
-            user: '',
+            user: '123',
             password: ''
         }
+    }
+    static getDerivedStateFromProps(props, state) {
+       return state
     }
     login = () => {
         const { login, location, history } = this.props

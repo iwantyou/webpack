@@ -113,7 +113,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "aa09b053cdf47dc04c11";
+/******/ 	var hotCurrentHash = "c321ad0d6e95335322ec";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -967,7 +967,7 @@ var __signature__ = typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoader
 
 
 
-function AsyncCompont(component) {
+function AsyncCompont(getComponent) {
   var _temp;
 
   return _temp = /*#__PURE__*/function (_React$Component) {
@@ -983,7 +983,7 @@ function AsyncCompont(component) {
       _this = _React$Component.call.apply(_React$Component, [this].concat(args)) || this;
 
       _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_3___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1___default()(_this), "state", {
-        component: null
+        Component: null
       });
 
       return _this;
@@ -991,19 +991,24 @@ function AsyncCompont(component) {
 
     var _proto = Asyncc.prototype;
 
-    _proto.componentDidMount = function componentDidMount() {
+    _proto.componentWillMount = function componentWillMount() {
       var _this2 = this;
 
-      component().then(function (component) {
+      getComponent().then(function (module) {
         _this2.setState({
-          component: component
+          Component: module["default"]
         });
       });
     };
 
     _proto.render = function render() {
-      var Ac = this.state.component;
-      return Ac ? react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(Ac, null) : null;
+      var Component = this.state.Component;
+
+      if (Component) {
+        return react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(Component, this.props);
+      }
+
+      return null;
     };
 
     // @ts-ignore
@@ -1672,13 +1677,18 @@ var Login = (_dec = Object(react_redux__WEBPACK_IMPORTED_MODULE_11__["connect"])
     });
 
     _this.state = {
-      user: '',
+      user: '123',
       password: ''
     };
+    console.log(_this.state.user);
     return _this;
   }
 
   var _proto = Login.prototype;
+
+  _proto.componentWillMount = function componentWillMount() {
+    console.log('this:', this);
+  };
 
   _proto.render = function render() {
     var _this2 = this;
@@ -2250,6 +2260,9 @@ __webpack_require__.r(__webpack_exports__);
 /* WEBPACK VAR INJECTION */(function(module) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "login", function() { return login; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "input", function() { return input; });
 /* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./config */ "./src/store/config.js");
+/* harmony import */ var redux_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux-actions */ "./node_modules/redux-actions/es/index.js");
+var _createActions;
+
 (function () {
   var enterModule = typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal.enterModule : undefined;
   enterModule && enterModule(module);
@@ -2258,6 +2271,7 @@ __webpack_require__.r(__webpack_exports__);
 var __signature__ = typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal["default"].signature : function (a) {
   return a;
 };
+
 
  // login 模块
 
@@ -2271,6 +2285,18 @@ var input = function input() {
     type: _config__WEBPACK_IMPORTED_MODULE_0__["INPUT"]
   };
 };
+var action = Object(redux_actions__WEBPACK_IMPORTED_MODULE_1__["createActions"])((_createActions = {}, _createActions[_config__WEBPACK_IMPORTED_MODULE_0__["LOGIN"]] = function (id) {
+  return id;
+}, _createActions[_config__WEBPACK_IMPORTED_MODULE_0__["INPUT"]] = function (val) {
+  return val;
+}, _createActions)); // let reducer = handleActions({
+//     [combineActions(a, b)] :(state, { payload }) => {return {...state, count: state.count + payload}}
+// }, {count: 0})
+
+/* eslint-disable no-console */
+// console.log('action', reducer({count: 6}, b(-1)))
+// export default action
+
 ;
 
 (function () {
@@ -2282,6 +2308,7 @@ var input = function input() {
 
   reactHotLoader.register(login, "login", "/Users/duzibo/test/webpack1/src/store/action.js");
   reactHotLoader.register(input, "input", "/Users/duzibo/test/webpack1/src/store/action.js");
+  reactHotLoader.register(action, "action", "/Users/duzibo/test/webpack1/src/store/action.js");
 })();
 
 ;
