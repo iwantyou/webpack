@@ -18,6 +18,7 @@ class Layout extends React.Component {
                 <SideLayout {...this.props} />
                 <div className='right'>{this.props.children()}</div>
             </div>
+            
         )
     }
 }
