@@ -1,63 +1,54 @@
 import { hot } from "react-hot-loader/root"
 import React from "react"
-import Errorboundary from  'component/errorboundary/index'
+import Errorboundary from "component/errorboundary/index"
+import RenderRoutes from "./router/index"
+import { routes } from "./router/router"
 import {
     BrowserRouter as Router,
     Switch,
-    Route,
     Redirect,
-    withRouter
+    withRouter,
+    Route
 } from "react-router-dom"
-import Layout from "./page/layout"
-import { Login } from "./page/login"
 import { connect } from "react-redux"
 
-const mapStateProps = state => ({
-    isLogin: state.isLogin
+const mapStateProps = (state) => ({
+    isLogin: state.isLogin,
 })
 
 class Index extends React.Component {
-
     render() {
         return (
             <Errorboundary>
-            <Router>
-                <App>
-                <Switch>
-                    <>
-                        <Redirect from='/' to='/layout' />
-                        <Route path='/layout' render={props => <Layout {...props} />} />
-                        <Route path='/login' exact component={Login} />
-                    </>
-                </Switch>
-                </App>
-            </Router>
+                <Router>
+                    <App>
+                        <Switch>
+                            <Route exact path="/">
+                                 <Redirect from = '/' to="/layout" /> 
+                            </Route>
+                            {RenderRoutes(routes)}
+                        </Switch>
+                    </App>
+                </Router>
             </Errorboundary>
         )
     }
 }
 @connect(mapStateProps)
-class AppContainer extends React.Component{
-    componentDidMount() {
-        const { location, isLogin, history } = this.props
-        if (!isLogin && location.pathname === '/layout/rule') {
-            console.log(history)
-        }
-    }
+class AppContainer extends React.Component {
     componentDidUpdate() {
         const { location, isLogin, history } = this.props
-        console.log('update', location)
-        if (!isLogin && location.pathname === '/layout/rule') {
-            console.log(111, history)
+
+        if (!isLogin && location.pathname === "/layout/rule") {
             history.replace({
-                pathname: '/login',
-                state:{
-                    path: location.pathname
-                }
+                pathname: "/login",
+                state: {
+                    path: location.pathname,
+                },
             })
         }
     }
-    render(){
+    render() {
         return this.props.children
     }
 }
