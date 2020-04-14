@@ -11,7 +11,7 @@ function Layout (props) {
             <div className='main'>
                 <div className='header'>{name}头部100%</div>
                 <SideLayout {...props} />
-                <div className='right'>{RenderRoutes(props.routes)}</div>
+                <div className='right'>{RenderRoutes(props.routes, props.redirect)}</div>
             </div>
 
         )

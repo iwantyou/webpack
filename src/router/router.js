@@ -16,21 +16,21 @@ export const routes = [
     {
         path: "/layout",
         component: Layout,
-        redirect: "/layout/web",
+        redirect: { from: "/layout", to: "/layout/web" },
         routes: [
             {
                 name: "主页1",
                 path: "/layout/web",
                 exact: true,
                 requireAuth: false,
-                component: Web
+                component: Web,
             },
             {
                 name: "主页2",
                 path: "/layout/web1",
                 exact: true,
                 requireAuth: false,
-                component: Web1
+                component: Web1,
             },
             {
                 name: "规则",
@@ -38,7 +38,7 @@ export const routes = [
                 icon: "icon-guize",
                 exact: true,
                 requireAuth: true,
-                component: Rule
+                component: Rule,
             },
             {
                 name: "用户",
@@ -46,7 +46,7 @@ export const routes = [
                 icon: "icon-yonghu",
                 exact: true,
                 requireAuth: false,
-                component: User
+                component: User,
             },
         ],
     },
