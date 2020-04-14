@@ -1,5 +1,5 @@
 import { hot } from "react-hot-loader/root"
-import React from "react"
+import React, { useEffect } from "react"
 import Errorboundary from "component/errorboundary/index"
 import RenderRoutes from "./router/index"
 import { routes } from "./router/router"
@@ -12,12 +12,8 @@ import {
 } from "react-router-dom"
 import { connect } from "react-redux"
 
-const mapStateProps = (state) => ({
-    isLogin: state.isLogin,
-})
 
-class Index extends React.Component {
-    render() {
+function Index () {
         return (
             <Errorboundary>
                 <Router>
@@ -33,11 +29,10 @@ class Index extends React.Component {
             </Errorboundary>
         )
     }
-}
-@connect(mapStateProps)
-class AppContainer extends React.Component {
-    componentDidUpdate() {
-        const { location, isLogin, history } = this.props
+function AppContainer(props) {
+  
+    useEffect(() => {
+        const { location, isLogin, history } = props
 
         if (!isLogin && location.pathname === "/layout/rule") {
             history.replace({
@@ -47,10 +42,14 @@ class AppContainer extends React.Component {
                 },
             })
         }
-    }
-    render() {
-        return this.props.children
-    }
+    })
+
+   return props.children
 }
-var App = withRouter(AppContainer)
+
+const mapStateProps = (state) => ({
+    isLogin: state.isLogin,
+})
+
+var App = withRouter(connect(mapStateProps)(AppContainer))
 export default hot(Index)

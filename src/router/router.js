@@ -16,6 +16,7 @@ export const routes = [
     {
         path: "/layout",
         component: Layout,
+        redirect: "/layout/web",
         routes: [
             {
                 name: "主页1",

@@ -1,23 +1,20 @@
-import React from "react"
+import React, { useState, useEffect, useRef, useMemo } from "react"
 import { Link } from "react-router-dom"
-import { routes } from "../router/router"
 import { Menu, Button } from "antd"
 import { Icon } from "component/icon/icon"
 import classnames from "classnames"
 import "./sidelayout.less"
 const { SubMenu, Item } = Menu
-export default class SideLayout extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            collapsed: true,
-            slecteKeys: [],
-            openKeys: [],
-            defaultopenKeys: [],
-            iscollapsedBtn: false,
-        }
-    }
-    tab = [
+export default function SideLayout(props) {
+    const [collapsed, setCollapsed] = useState(true)
+    // const [slecteKeys ] = useState(["/layout/web"])
+    const [ defaultopenKeys ] = useState(["sub1"])
+    const [ iscollapsedBtn ] = useState(false)
+    const [selectedKeys, setSelectedKeys] = useState(["/layout/web"])
+    const { location } = props
+
+    const tab = useRef(null)
+    tab.current = [
         {
             name: "主页",
             icon: "icon-zhuye",
@@ -43,12 +40,10 @@ export default class SideLayout extends React.Component {
             icon: "icon-yonghu",
         },
     ]
-    toggleCollapse = () => {
-        this.setState((state) => ({
-            collapsed: !state.collapsed,
-        }))
+    const toggleCollapse = () => {
+        setCollapsed((val) => !val)
     }
-    deepItem = (route, isChild = false) => {
+    const deepItem = (route, isChild = false) => {
         if (route.children) {
             return (
                 <SubMenu
@@ -60,58 +55,49 @@ export default class SideLayout extends React.Component {
                         </span>
                     }
                 >
-                    {route.children.map((child) => this.deepItem(child, true))}
+                    {route.children.map((child) => deepItem(child, true))}
                 </SubMenu>
             )
         }
         return (
             <Item key={route.path}>
                 {!isChild && <Icon className={classnames(`${route.icon}`)} />}
-                <Link
-                    to={ route.path}
-                >
-                    {route.name}
-                </Link>
+                <Link to={route.path}>{route.name}</Link>
             </Item>
         )
     }
-    componentDidUpdate() {
-        console.log("nextProps", this.props)
-    }
-    render() {
-        const {
-            collapsed,
-            slecteKeys,
-            openKeys,
-            iscollapsedBtn,
-            defaultopenKeys,
-        } = this.state
-        return (
-            <div className={classnames("sidelayout")}>
-                {iscollapsedBtn && (
-                    <Button
-                        type='primary'
-                        onClick={this.toggleCollapse}
-                        style={{ marginBottom: 15 }}
-                    >
-                        <Icon
-                            className={classnames(
-                                `${collapsed ? "icon-icons_flod" : "icon-icons_unflod"}`
-                            )}
-                        ></Icon>
-                    </Button>
-                )}
-                <Menu
-                    className={classnames("SideLayout")}
-                    defaultSelectedKeys={slecteKeys}
-                    defaultOpenKeys={defaultopenKeys}
-                    mode='inline'
-                    theme='dark'
-                    inlineCollapsed={!collapsed}
+
+    useEffect(() => {
+        setSelectedKeys([location.pathname])
+    }, [location])
+
+    return (
+        <div className={classnames("sidelayout")}>
+            {iscollapsedBtn && (
+                <Button
+                    type='primary'
+                    onClick={toggleCollapse}
+                    style={{ marginBottom: 15 }}
                 >
-                    {this.tab.map((route) => this.deepItem(route))}
-                </Menu>
-            </div>
-        )
-    }
+                    <Icon
+                        className={classnames(
+                            `${collapsed ? "icon-icons_flod" : "icon-icons_unflod"}`
+                        )}
+                    ></Icon>
+                </Button>
+            )}
+            <Menu
+                className={classnames("SideLayout")}
+                // defaultSelectedKeys={slecteKeys}
+                defaultOpenKeys={defaultopenKeys}
+                selectedKeys={selectedKeys}
+                mode='inline'
+                theme='dark'
+                inlineCollapsed={!collapsed}
+                // onSelect={onSelect}
+            >
+                {tab.current.map((route) => deepItem(route))}
+            </Menu>
+        </div>
+    )
 }
