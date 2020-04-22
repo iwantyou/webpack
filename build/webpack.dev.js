@@ -29,8 +29,10 @@ config.optimization = Object.assign({}, {
         priority: -5
       },
       verdors44: {
-        test: /node_modules/,
-        name: "disanfang",
+        test: module => {
+          return /[\\/]node_modules[\\/]/.test(module.resource)
+        },
+        name: "vendors",
         minSize: 10,
         minChunks: 1,
         priority: 0

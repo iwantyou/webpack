@@ -4,14 +4,16 @@ import { Toast } from "component/toast/index"
 import classnames from "classnames"
 import { connect } from "react-redux"
 import { login } from "action/action"
+import { useLocation, useHistory } from 'react-router-dom'
 import "./login.less"
 
 function Login(props) {
     const [user, setUser] = useState("123")
     const [password, setPassword] = useState("")
-
+    const location = useLocation()
+    const history = useHistory()
     const login = () => {
-        const { login, location, history } = props
+        const { login } = props
         if (!user || !password) return Toast("请输入完整内容", 2000)
         if (user === "123456" && password == "123456") {
             history.replace({
