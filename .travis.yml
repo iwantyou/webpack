@@ -17,7 +17,7 @@ after_script:
   - git add .
   - git commit -m "TravisCI 自动部署"
   # Github Pages
-  - git push --force --quiet "https://${TOKEN}@github.com/webpack/webpack.github.io.git" master:master
+  - git push --force --quiet "https://${TOKEN}@github.com:iwantyou/webpack.git" master:master
 # E: Build LifeCycle
 branches:
   only: 
