@@ -21,7 +21,7 @@ module.exports = {
     app: path.resolve(__dirname, "../src/entry.js")
   },
   output: {
-    publicPath: ENV === "development" ? "/" : "/",
+    publicPath: ENV === "development" ? "/" : "./",
     path: PATH,
     filename: "js/[name].bundles.js",
     chunkFilename: "js/[id].js"
