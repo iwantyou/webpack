@@ -2,7 +2,7 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const ENV = process.env.NODE_ENV;
-const PATH = path.join(__dirname, "..", "dist");
+const PATH = path.join(__dirname, "..", "dist/");
 const WebpackBundleAnalyzer = require("webpack-bundle-analyzer")
   .BundleAnalyzerPlugin;
 const ANA = process.env.NODE_ANALYZER;
@@ -21,10 +21,10 @@ module.exports = {
     app: path.resolve(__dirname, "../src/entry.js")
   },
   output: {
-    publicPath: ENV === "development" ? "/" : "http://baidu.com/cdn",
+    publicPath: ENV === "development" ? "/" : "./",
     path: PATH,
-    filename: "js/[name].bundles.js",
-    chunkFilename: "js/[id][name].js"
+    filename: "static/js/[name].bundles.js",
+    chunkFilename: "static/js/[name].js"
   },
   resolve: {
     modules: ["node_modules"],
@@ -114,10 +114,10 @@ module.exports = {
       },
       {
         test: /\.(svg|woff2?|eot|ttf|otf)(\?.*)?$/,
-        loader: "file-loader",
+        loader: "url-loader",
         options: {
           limit: 1000,
-          name: "[name].[hash:7].[ext]"
+          name: "fonts/[name].[hash:7].[ext]"
         }
       }
     ]
@@ -126,7 +126,13 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: "index.html", // 匹配路径会从跟路径开始 process.pwd()
       filename: "index.html",
-      title: "webpack 测试"
+      title: "webpack 测试",
+      inject: true,
+      minify: {
+        removeComments: true,
+        collapseWhitespace: true,
+        removeAttributeQuotes: true
+      },
     })
   ].concat(ANA ? [new WebpackBundleAnalyzer()] : [])
 };

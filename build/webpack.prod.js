@@ -17,13 +17,17 @@ config.plugins = config.plugins.concat([
     }
   }),
   new MiniCssExtractPlugin({
-    filename: "[name].[chunkhash].css"
+    filename: "static/css/[name].[chunkhash].css"
   }),
   new OptimizeCssAssetsPlugin({})
 ]);
+// config.devtool =  "source-map"
 config.optimization = Object.assign(
   {},
   {
+    runtimeChunk: {
+      name: 'runtime'
+    },
     splitChunks: {
       chunks: "all",
       minChunks: 2,
@@ -33,6 +37,16 @@ config.optimization = Object.assign(
           name: "common",
           minChunks: 2,
           priority: -5
+        },
+        react: {
+          test: (module) => {
+            console.log('222', module.resource)
+            let reg = /corejs/g
+            return reg.test(module.resource)
+          },
+          name: "react",
+          minChunks: 2,
+          priority: 1
         },
         verdors44: {
           test: /node_modules/,
@@ -54,7 +68,13 @@ webpack(config, (err, stats) => {
     console.log(chalk.red("production build error..."));
     return process.exit(1);
   }
-  process.stdout.write(stats.toString());
+  process.stdout.write(stats.toString({
+    // colors: true,
+    // modules: false,
+    // children: false,
+    // chunks: false,
+    // chunkModules: false
+  }) + '\n')
   console.log(chalk.cyan("production build success!"));
 });
 

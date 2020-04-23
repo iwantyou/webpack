@@ -11,7 +11,6 @@ message.config({
   top: "30vh",
   duration: 1
 });
-console.log(process.env.NODE_ENV, 99999, TYPE);
 function render() {
   RenderDOM.render(<Provider store={store} ><Index /></Provider>, document.querySelector("#app"));
 }
