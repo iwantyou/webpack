@@ -9,7 +9,15 @@ install:
     - npm install
 script:
   - npm run build
-
+after_script:
+  - cd ./dist
+  - git init
+  - git config user.name "duzibo"
+  - git config user.email "duzibo@bytedance.com"
+  - git add .
+  - git commit -m "Update tools"
+  - git push --force --quiet "https://${TOKEN}" master:${BRANCH}
+# E: Build LifeCycle
 branches:
   only: 
     - master
