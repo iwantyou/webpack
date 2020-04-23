@@ -126,7 +126,12 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: "index.html", // 匹配路径会从跟路径开始 process.pwd()
       filename: "index.html",
-      title: "webpack 测试"
+      title: "webpack 测试",
+      minify: {
+        removeComments: true,
+        collapseWhitespace: true,
+        removeAttributeQuotes: true
+      }
     })
   ].concat(ANA ? [new WebpackBundleAnalyzer()] : [])
 };
