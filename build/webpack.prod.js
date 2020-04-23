@@ -54,7 +54,7 @@ webpack(config, (err, stats) => {
     console.log(chalk.red("production build error..."));
     return process.exit(1);
   }
-  process.stdout.write(stats.toString());
+  process.stdin.write(stats.toString());
   console.log(chalk.cyan("production build success!"));
 });
 
