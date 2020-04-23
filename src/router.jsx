@@ -2,7 +2,7 @@ import { hot } from "react-hot-loader/root"
 import React from "react"
 import Errorboundary from  'component/errorboundary/index'
 import {
-    BrowserRouter as Router,
+    HashRouter as Router,
     Switch,
     Route,
     Redirect,
