@@ -10,7 +10,14 @@ install:
 script:
   - npm run build
 after_script:
-  - travis ci init
+  - cd ./dist
+  - git init
+  - git config user.name "duzibo"
+  - git config user.email "duzibi@bytedance"
+  - git add .
+  - git commit -m "TravisCI 自动部署"
+  # Github Pages
+  - git push --force --quiet "https://${TOKEN}@github.com/webpack/webpack.github.io.git" master:master
 # E: Build LifeCycle
 branches:
   only: 
