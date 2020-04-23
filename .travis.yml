@@ -12,10 +12,10 @@ script:
 after_script:
   - cd ./dist
   - git init
-  - git config user.name "duzibo"
+  - git config user.name "iwantyou"
   - git config user.email "649237053@qq.com"
   - git add .
-  - git commit -m "TravisCI 自动部署"
+  - git commit -m "TravisCI"
   # Github Pages
   - git push --force --quiet "https://${TOKEN}@github.com:iwantyou/webpack.git" master:master
 # E: Build LifeCycle
