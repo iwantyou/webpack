@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[2],{312:function(e,n,a){"use strict";a.r(n),a(77),a(305);var s=a(0),t=a.n(s);n.default=function(e){return e.match,t.a.createElement("div",{className:"user"},"这是user页面")}}}]);
