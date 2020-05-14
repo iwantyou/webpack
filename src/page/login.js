@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react"
-import { Button, message } from "antd"
+import React, { useState } from "react"
+import { Button } from "antd"
 import { Toast } from "component/toast/index"
 import classnames from "classnames"
 import { connect } from "react-redux"

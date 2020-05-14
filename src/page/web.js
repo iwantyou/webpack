@@ -1,16 +1,23 @@
-import React from 'react'
+import React, { useState } from "react"
+import { useDebounce } from "@/hooks/index"
 
-class C extends React.Component{
-    render() {
-        console.log('component', C.Component)
-    return (<div>这是c组件</div>)
+function Web(props) {
+    const [counter, setCounter] = useState(0)
+    const fn = () => {
+        setCounter(counter => counter+1)
     }
-}
-function Web (props){
+
+    const add = useDebounce(fn, 1000)
+   
     return (
-        <div className="web">
+        <div className='web'>
             只是web页面 {JSON.stringify(props)}
+            <div>
+            <p>{counter}</p>
+            <button onClick={add}>按钮</button>
+            </div>
+            
         </div>
     )
 }
-export default Web 
+export default Web
