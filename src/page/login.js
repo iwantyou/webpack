@@ -1,15 +1,17 @@
-import React, { useState } from "react"
+import React, { useState, useRef } from "react"
 import { Button } from "antd"
 import { Toast } from "component/toast/index"
 import classnames from "classnames"
 import { connect } from "react-redux"
 import { login } from "action/action"
 import { useLocation, useHistory } from 'react-router-dom'
+import Transition  from 'component/transitions/index'
 import "./login.less"
 
 function Login(props) {
     const [user, setUser] = useState("123")
     const [password, setPassword] = useState("")
+    const [ show, setShow ] = useState(true)
     const location = useLocation()
     const history = useHistory()
     const login = () => {
@@ -28,6 +30,21 @@ function Login(props) {
     return (
         <div className={classnames("login")}>
             <div className={classnames("content")}>
+                <Transition 
+                    transitionName="test" 
+                    visiable={show} 
+                    appearEnteractive={3000}
+                    appearEnd={1000}
+                    onEnterActive={3000}
+                    onEnterEnd={1000}
+                    onLeaveActive={400}
+                    onLeaveEnd={500}
+                    >
+                   <div>哈哈哈哈</div>
+                </Transition>
+            <div>
+                <button onClick={() => {setShow((state) => !state)}}>button</button>
+            </div>
                 <div
                     style={{
                         textAlign: "center",

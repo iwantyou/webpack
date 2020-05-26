@@ -10,6 +10,39 @@
         width: 400px;
         height: 300px;
         background-color: #fff;
+        .test-appear{
+            transform: translateY(-50px);
+        }
+        .test-appear-active{
+            transition: transform 3s linear;
+            transform: translateY(50px);
+        }
+        .test-appear-end{
+            transition: transform 1s linear;
+            transform: translateY(0);
+        }
+        .test-enter{
+            transform: translateX(-100px) scale(0);
+        }
+        .test-enter-active{
+            transition: transform 3s linear;
+            transform: translateX(10px) scale(1.2);
+        }
+        .test-enter-end{
+            transition: transform 1s linear;
+            transform: translateX(0) scale(1);
+        }
+        .test-leave{
+            transform: translateX(0px);
+        }
+        .test-leave-active{
+            transition: transform .4s linear;
+            transform: translateX(50px);
+        }
+        .test-leave-end{
+            transition: transform .5s linear;
+            transform: translateX(40px);
+        }
         .form{
             text-align: center;
             width:100%;
