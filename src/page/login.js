@@ -74,7 +74,7 @@ class Login extends Component {
                             paddingTop: "25px",
                         }}
                     >
-                        登陆
+                        登陆666
                     </div>
                     <Test />
                     <div className={classnames("form")}>
