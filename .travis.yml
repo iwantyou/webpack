@@ -9,17 +9,18 @@ install:
     - npm install
 script:
   - npm run build
+  - pwd
 after_script:
   - cd ./dist
   - git init
   - git config user.name "iwantyou"
   - git config user.email "649237053@qq.com"
   - git add .
-  - git commit -m "TravisCI"
+  - git commit -m "test TravisCI"
   # Github Pages
-  - git push --force --quiet "https://${TOKEN}@github.com/iwantyou/webpack.git" master:master
+  - git push --force --quiet "https://${TOKEN}@github.com/iwantyou/webpack.git" master:newbranch
 # E: Build LifeCycle
 branches:
   only: 
-    - gh-react
+    - master
 
