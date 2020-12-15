@@ -1,4 +1,5 @@
 import React from 'react'
+import './web.less'
 
 class C extends React.Component{
     render() {

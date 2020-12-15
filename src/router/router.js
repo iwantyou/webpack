@@ -1,6 +1,6 @@
-import AsyncComponent from 'component/asyncCompont/index'
+import AsyncComponent from 'component/asyncCompont'
 
-const Web = AsyncComponent(() => import('../page/web'))
+const Web = AsyncComponent(() => import(/* webpackChunkname: [name]*/'../page/web'))
 
 const User = AsyncComponent(() => import('../page/user'))
 

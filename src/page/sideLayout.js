@@ -5,6 +5,7 @@ import { Menu, Button } from "antd";
 import { Icon } from "component/icon/icon";
 import classnames from "classnames";
 import "./sidelayout.less";
+import './test'
 const { SubMenu, Item } = Menu;
 export default class SideLayout extends React.Component {
   constructor(props) {

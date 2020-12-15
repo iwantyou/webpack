@@ -5,6 +5,10 @@ node_js:
 cache:
   directories:
     - node_modules
+  npm: true
+  yarn: true
+before_install: 
+    - npm --version
 install:
     - npm install
 script:

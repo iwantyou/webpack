@@ -1,1 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[1],{313:function(e,n,r){"use strict";r.r(n);var t=r(0),a=r.n(t);n.default=function(e){return e.history,a.a.createElement("div",{className:"rule"},"只是rule页面")}}}]);

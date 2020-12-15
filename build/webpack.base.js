@@ -1,6 +1,7 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const { optimize } = require("webpack");
 const ENV = process.env.NODE_ENV;
 const PATH = path.join(__dirname, "..", "dist");
 const WebpackBundleAnalyzer = require("webpack-bundle-analyzer")
@@ -18,8 +19,10 @@ const cretaeRule = () => {
 module.exports = {
   mode: ENV === "development" ? "development" : "production",
   entry: {
-    app: path.resolve(__dirname, "../src/entry.js")
+    app: path.resolve(__dirname, "../src/entry.js"),
+    test: path.resolve(__dirname, "../src/tests.js")
   },
+  // entry :[path.resolve(__dirname, "../src/entry.js")],
   output: {
     publicPath: ENV === "development" ? "/" : "./",
     path: PATH,

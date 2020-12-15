@@ -8,41 +8,51 @@ const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
 config.plugins = config.plugins.concat([
   new webpack.optimize.OccurrenceOrderPlugin(),
-  new uglifyJs({
-    cache: true,
-    parallel: true,
-    uglifyOptions: {
-      compress: true,
-      mangle: false
-    }
-  }),
   new MiniCssExtractPlugin({
-    filename: "[name].[chunkhash].css"
+    filename: "static/css/[name].[chunkhash].css",
+    chunkFilename: "static/css/[name].[contenthash:8].chunk.css",
   }),
-  new OptimizeCssAssetsPlugin({})
+  new OptimizeCssAssetsPlugin({}),
 ]);
 config.optimization = Object.assign(
   {},
   {
-    splitChunks: {
-      chunks: "all",
-      minChunks: 2,
-      cacheGroups: {
-        common: {
-          minSize: 0,
-          name: "common",
-          minChunks: 2,
-          priority: -5
+    minimize: true,
+    minimizer: [
+      new uglifyJs({
+        cache: true,
+        parallel: true,
+        uglifyOptions: {
+          compress: true,
+          mangle: false,
         },
+      }),
+    ],
+    runtimeChunk: {
+      name: (enterpoint) => {
+        return `runtime-${enterpoint.name}`;
+      },
+    },
+    splitChunks: {
+      chunks: "async",
+      name: false,
+      minChunks: 1,
+      cacheGroups: {
+        // common: {
+        //   minSize: 0,
+        //   name: "common",
+        //   minChunks: 1,
+        //   priority: -5
+        // },
         verdors44: {
           test: /node_modules/,
-          name: "disanfang",
+          name: "vendros",
           minSize: 10,
           minChunks: 1,
           priority: 0
         }
       }
-    }
+    },
   }
 );
 let spinner = ora("building for production...");

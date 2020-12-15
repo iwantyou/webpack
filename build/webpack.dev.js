@@ -23,9 +23,9 @@ config.optimization = Object.assign({}, {
     minChunks: 2,
     cacheGroups: {
       common: {
-        minSize: 0,
+        minSize: 2000,
         name: "common",
-        minChunks: 2,
+        minChunks: 2, 
         priority: -5
       },
       verdors44: {
@@ -34,6 +34,15 @@ config.optimization = Object.assign({}, {
         minSize: 10,
         minChunks: 1,
         priority: 0
+      },
+      react: {
+        test: (module) => {
+          return /node_modules\/react-dom/g.test(module.resource)
+        },
+        name: 'react',
+        minSize: 10,
+        minChunks: 1,
+        priority: 10
       }
     }
   }

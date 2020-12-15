@@ -3,6 +3,7 @@ import { routes } from "../router/router"
 import { Route } from "react-router-dom"
 import SideLayout from "./sideLayout"
 import "./layout.less"
+import './test'
 class Layout extends React.Component {
     constructor(props) {
         super(props)

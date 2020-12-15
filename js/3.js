@@ -1,1 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[3],{311:function(n,e,t){"use strict";t.r(e);var a=t(6),i=(t.n(a),t(0)),o=t.n(i);o.a.Component,e.default=function(n){return o.a.createElement("div",{className:"web"},"只是web页面 ",JSON.stringify(n))}}}]);

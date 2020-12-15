@@ -1,5 +1,5 @@
 import React from 'react'
-
+import './user.less'
 function User (props){
     const { match }  = props
     return (
